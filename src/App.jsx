@@ -20,16 +20,15 @@ function App() {
 
   function handleSelectSquer(rowIndex, colIndex) {
 
+    console.log(gameTurns);
 
     setgameTurns(prevGameTurns => {
       const activePlayer = handelPlayer(prevGameTurns);
 
       const updateTurns = [
-        {
-          square: { row: rowIndex, col: colIndex }, player: activePlayer,
-          ...prevGameTurns,
-        }];
-      console.log(prevGameTurns);
+        { square: { row: rowIndex, col: colIndex }, player: activePlayer },
+        ...prevGameTurns,
+      ];
 
       return updateTurns;
 
