@@ -3,28 +3,33 @@ import GameBoard from "./components/GameBoard.jsx"
 import Player from "./components/Player.jsx"
 import Log from "./components/Log.jsx";
 
+
+function handelPlayer(gameTurns) {
+  let currentPlayer = 'X';
+
+  if (gameTurns.length > 0 && gameTurns[0].player === 'X') {
+    currentPlayer = 'O';
+  }
+  return currentPlayer;
+}
+
 function App() {
   const [gameTurns, setgameTurns] = useState([]);
-  const [activePlayer, setActivePlayer] = useState('X');
+
+  const activePlayer = handelPlayer(gameTurns);
 
   function handleSelectSquer(rowIndex, colIndex) {
 
-    setActivePlayer((prevPlayer) => prevPlayer === 'X' ? 'O' : 'X');
 
     setgameTurns(prevGameTurns => {
-
-      let currentPlayer = 'X';
-
-      if (prevGameTurns.length > 0 && prevGameTurns[0].player === 'X') {
-        currentPlayer = 'O';
-      }
+      const activePlayer = handelPlayer(prevGameTurns);
 
       const updateTurns = [
         {
-          square: { row: rowIndex, col: colIndex }, player: currentPlayer,
-          ...prevGameTurns
-        }]
-      console.log(updateTurns);
+          square: { row: rowIndex, col: colIndex }, player: activePlayer,
+          ...prevGameTurns,
+        }];
+      console.log(prevGameTurns);
 
       return updateTurns;
 
@@ -39,9 +44,10 @@ function App() {
       </ol>
       <GameBoard
         gameTurns={gameTurns}
-        onSelect={handleSelectSquer} />
+        onSelect={handleSelectSquer}
+      />
     </div>
-    <Log />
+    <Log turns={gameTurns} />
   </main>
 
   )

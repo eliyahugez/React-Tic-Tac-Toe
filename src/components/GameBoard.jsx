@@ -24,7 +24,7 @@ export default function GameBoard({ onSelect, gameTurns }) {
 
                         {row.map((col, colIndex) => (
                             <li key={colIndex} >
-                                <button onClick={() => onSelect(rowIndex, colIndex)} >{col}</button>
+                                <button onClick={() => onSelect(rowIndex, colIndex)} disabled={col !== null} >{col}</button>
                             </li>
                         ))}
 
